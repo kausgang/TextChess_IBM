@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/javascripts/main.js"></script>
+
+    <!-- chessboard -js -->
+    <!-- https://chessboardjs.com/index.html -->
+
+    <link rel="stylesheet"
+      href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
+      integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU"
+      crossorigin="anonymous">
+
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
+        integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
+        crossorigin="anonymous"></script>
+
+
+  </head>
+  <body>
+ 
+    
+
+
+    <div id="main" class="grid-container">
+
+
+      <div id="left">
+          
+          <div id="pgn">
+  
+              <table id="PGNTable">
+                  <!-- <tr>
+                    <td>Row1 cell1</td>
+                    <td>Row1 cell2</td>
+                  </tr> -->
+                  
+              </table>
+  
+          </div>
+          <p></p>
+          <div id="input_holder">
+  
+              <label>Enter Move</label>
+              <input type="text" id="input">
+  
+          </div>
+          <p></p>
+          <div id="game_buttons">
+  
+              <!-- <button type="button" id="undo"> Undo</button>
+              <button type="button" id="resign"> Resign</button> -->
+              <button type="button" id="play_as">Play As Black</button>
+  
+          </div>
+
+      </div>
+
+      <!-- <div id="middle">
+
+        <div id="enginelocation_playas_level">
+  
+          <label>Engine Location</label>
+          <input type="text" id="engine_location">
+
+          <p></p>
+          
+          <label>Engine Level</label>
+          <select name="engine_level" id="engine_level">
+            <option value="20">20</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+
+          <p></p>
+          
+          <label>Play As</label>
+          <select name="play_as" id="play_as">
+            <option value="white">White</option>
+            <option value="black">Black</option>
+          </select>
+
+      </div>
+
+      </div> -->
+
+
+      <div id="right">
+          
+          <div id="show-hide_button_holder">
+  
+              <button type="button" id="show-hide_button">Show Board</button>
+              <button type="button" id="empty_board">Show Empty Board</button>
+  
+          </div>
+
+          <p></p>
+
+          <!-- CHESSBOARD -->
+          <div id="board1" style="width: 600px"></div>
+
+          <div id="board2" style="width: 600px"></div>
+
+          
+          
+
+
+      </div>
+  
+  </div>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,81 @@
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 30% 20% 50%;
+  grid-template-rows: 10% 80% 10%;
+  gap: 1px 1px;
+  grid-template-areas: ". . ." ". . ." ". . .";
+
+  margin: 2%;
+ 
+}
+
+/* make the PGNTable scroll when it reaches bottom of page */
+
+#pgn{
+  height: 600px;
+  overflow: auto;
+  
+}
+
+/* #PGNTable {
+  border: 1px solid black;
+
+} */
+
+#PGNTable, td {
+  border: 1px solid black;
+  font-size: larger;
+  
+}
+
+/* 
+#main{
+
+  margin: 0.1%;
+  padding: 5px;
+}
+
+#left {
+  
+  float: left;
+  border: 1px solid black;
+  padding: 5px;
+  size: 30%;
+}
+
+#middle {
+
+  border: 1px solid black;
+  padding: 5px;
+  float: middle;
+  size: 30%;
+  margin: auto;
+
+}
+
+#right {
+  border: 1px solid black;
+  padding: 5px;
+  float: right;
+}
+
+#show-hide_button_holder{
+  padding: 5px;
+}
+
+#show-hide_button{
+  width: 100px;
+}
+
+#myTable{
+  size: 40%
+}
+table, td {
+  border: 1px solid black;
+  
+}
+
+#input_holder{
+  padding: 5px;
+} */
