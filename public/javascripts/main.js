@@ -11,12 +11,22 @@ $(document).ready(function(){
 
     var move_counter = 0;
     var play_as_black = false;
-    var engine_evaluation = 0
+    
 
+
+    var engine_level = $("#engine_level").val()
+    console.log(engine_level)
+
+    $("#engine_level").on('change', function() {
+        // alert( this.value );
+        engine_level = this.value;
+        // console.log(engine_level)
+      });
 
 
     $("#board1").hide();
     $("#board2").hide();
+    $("#play_as_white").hide();
 
 
     // load the board position if move is clicked
@@ -74,6 +84,8 @@ $(document).ready(function(){
                     
     });
 
+
+    
 
 
     // Input move 
@@ -165,7 +177,7 @@ $(document).ready(function(){
 
                     //  5. find engine response to the move
                     // $.get('/engine_move',{'fen':res.FEN},function(engine_response,eng_err) {
-                    $.get('/engine_move',{'fen':res.FEN},function(engine_response,eng_err) {
+                    $.get('/engine_move',{'fen':res.FEN , 'engine_level': engine_level},function(engine_response,eng_err) {
 
                         
                         // console.log(engine_response)
@@ -235,10 +247,12 @@ $(document).ready(function(){
 
 
     //if played as black
-    $("#play_as").click(function(){
+    $("#play_as_black").click(function(){
 
         //hide the play as button
         $(this).hide();
+        $("#play_as_white").show();
+        
 
         // set play as black flag = true
         play_as_black = true;
@@ -249,7 +263,7 @@ $(document).ready(function(){
         board1.orientation('black')
         
         // start with engine move
-        $.get('/engine_move',{'fen':FEN},function(engine_response,eng_err) {
+        $.get('/engine_move',{'fen':FEN,'engine_level': engine_level},function(engine_response,eng_err) {
 
                         
             // console.log(engine_response)
@@ -273,7 +287,18 @@ $(document).ready(function(){
             board1.position(FEN)
             
             
-        
+             // // scroll the pgn table to the end
+            var scrollBottom = 0;
+            scrollBottom = Math.max($('#PGNTable').height() - $('#pgn').height() + 20, 0);
+
+            if(scrollBottom > 0)
+            {
+
+                var height = $('#PGNTable').height();
+                // $('#PGNTable').scrollTop(scrollBottom);
+                $('#pgn').scrollTop(height);
+                
+            }
             
         })
     })
@@ -283,9 +308,55 @@ $(document).ready(function(){
 
 
 
+    $("#play_as_white").click(function(){
+
+        play_as_black=false;
+        $(this).hide();
+        $("#play_as_black").show();
+        board1.orientation('white');
+
+        // start with engine move
+        $.get('/engine_move',{'fen':FEN,'engine_level': engine_level},function(engine_response,eng_err) {
+
+                        
+            // console.log(engine_response)
+
+            // receive the engine move
+            var engine_move = engine_response.engine_move;
+
+            // capture FEN
+            FEN = engine_response.FEN
+
+            //update the taable with the engine move
+            // $("#PGNTable").find("tr").last().append('<td>'+engine_move+'</td>');
+            // $("#PGNTable").append('<tr><td> '+ (++move_counter)+' </td>'+'<td>'+engine_move+' </td></tr>');
+            $("#PGNTable").append('<td></td><td></td>'
+                            +' .</td>'+'<td id="Move" data-FEN="'+ FEN +'" >'
+                            +'<a href="#">'
+                            +engine_move+'</td>'); 
+
+            //  4. update board fen
+            // FEN = engine_response.FEN;
+            board1.position(FEN)
+            
+             // // scroll the pgn table to the end
+            var scrollBottom = 0;
+            scrollBottom = Math.max($('#PGNTable').height() - $('#pgn').height() + 20, 0);
+
+            if(scrollBottom > 0)
+            {
+
+                var height = $('#PGNTable').height();
+                // $('#PGNTable').scrollTop(scrollBottom);
+                $('#pgn').scrollTop(height);
+                
+            }
 
 
+         })
 
+
+    })
 
 
 

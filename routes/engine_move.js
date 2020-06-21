@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
   var chess = req.app.locals.chess;
   var engine = req.app.locals.engine;
   var fen = req.query.fen;
+  var engine_level = req.query.engine_level;
 
   // console.log(fen);
 
@@ -22,7 +23,11 @@ router.get('/', function(req, res, next) {
   
   // engine.postMessage("setoption name skill level value 19")
   engine.postMessage("position fen "+ fen);
-  engine.postMessage("go depth 15");
+  // engine.postMessage("go depth 15");
+  engine.postMessage("go depth "+(engine_level*3));
+
+  // console.log(engine_level*3)
+
 
   engine.onmessage = function(line){
 

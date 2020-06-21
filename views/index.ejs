@@ -64,7 +64,10 @@
   
               <!-- <button type="button" id="undo"> Undo</button>
               <button type="button" id="resign"> Resign</button> -->
-              <button type="button" class="button" id="play_as">Play As Black</button>
+
+              <button type="button" class="button" id="play_as_black">You Play As Black</button>
+              <button type="button" class="button" id="play_as_white">You Play As White</button>
+             
   
           </div>
 
@@ -106,15 +109,25 @@
   
               <button type="button" class="button" id="show-hide_button">Show Board</button>
               <button type="button" class="button" id="empty_board">Show Empty Board</button>
+
+              
+             
+              <select name="engine_level" id="engine_level">
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="3">Level 3</option>
+                <option value="4">Level 4</option>
+                <option value="5" selected>Level 5</option>
+              </select>
   
           </div>
 
           <p></p>
 
           <!-- CHESSBOARD -->
-          <div id="board1" style="width: 600px"></div>
+          <div id="board1" style="width: 450px"></div>
 
-          <div id="board2" style="width: 600px"></div>
+          <div id="board2" style="width: 450px"></div>
 
           
           
