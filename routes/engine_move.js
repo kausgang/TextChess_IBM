@@ -17,6 +17,8 @@ router.get('/', function(req, res, next) {
 
   // console.log(fen);
 
+
+
   
   // engine.postMessage("setoption name skill level value 19")
   engine.postMessage("position fen "+ fen);
@@ -24,7 +26,7 @@ router.get('/', function(req, res, next) {
 
   engine.onmessage = function(line){
 
-    // console.log(chess)
+    // console.log(line)
 
 
     if (line.indexOf("bestmove") > -1) {

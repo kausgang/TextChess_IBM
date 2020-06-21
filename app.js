@@ -54,6 +54,7 @@ app.use('/engine_move',engine_move);
 
 
 
+
 app.locals.chess = new Chess(); //app.locals makes it available in other routes and views
 app.locals.fen = ''; 
 
