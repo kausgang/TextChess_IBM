@@ -26,9 +26,16 @@
 #PGNTable, td {
   border: 1px solid black;
   font-size: larger;
+  overflow: auto;
   
 }
 
+
+#input{
+
+  font-size: larger;
+  font-weight: bold;
+}
 /* 
 #main{
 

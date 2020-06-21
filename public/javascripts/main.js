@@ -85,6 +85,9 @@ $("#empty_board").click(function(){
 // }
 
 
+
+
+
 var move_counter = 0;
 var play_as_black = false;
 
@@ -102,6 +105,25 @@ $("#input").keypress(function(event) {
             alert ("enter valid move");
             return
         }
+        
+        
+       
+        
+       
+        var scrollBottom = 0;
+        scrollBottom = Math.max($('#PGNTable').height() - $('#pgn').height() + 20, 0);
+
+        if(scrollBottom > 0)
+        {
+
+            var height = $('#PGNTable').height();
+            // $('#PGNTable').scrollTop(scrollBottom);
+            $('#pgn').scrollTop(height);
+            
+        }
+            
+
+
 
         // 2. Check if this is a leagal move
         $.get('/validate_move',{move:move},function(res,err) {
@@ -126,7 +148,19 @@ $("#input").keypress(function(event) {
                 board1.position(FEN)
                 // board1.position(res.FEN) 
 
-
+                // Scroll the PGN table to the end move
+                var scrollBottom = 0;
+                scrollBottom = Math.max($('#PGNTable').height() - $('#pgn').height() + 20, 0);
+        
+                if(scrollBottom > 0)
+                {
+        
+                    var height = $('#PGNTable').height();
+                    // $('#PGNTable').scrollTop(scrollBottom);
+                    $('#pgn').scrollTop(height);
+                    
+                }
+                
 
                 //  5. find engine response to the move
                 // $.get('/engine_move',{'fen':res.FEN},function(engine_response,eng_err) {
@@ -153,6 +187,20 @@ $("#input").keypress(function(event) {
                     // FEN = engine_response.FEN;
                     board1.position(FEN)
                     
+
+                    // Scroll the PGN table to the end move
+                    var scrollBottom = 0;
+                    scrollBottom = Math.max($('#PGNTable').height() - $('#pgn').height() + 20, 0);
+            
+                    if(scrollBottom > 0)
+                    {
+            
+                        var height = $('#PGNTable').height();
+                        // $('#PGNTable').scrollTop(scrollBottom);
+                        $('#pgn').scrollTop(height);
+                        
+                    }
+
                     
                     
                 })

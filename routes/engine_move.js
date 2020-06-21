@@ -18,9 +18,9 @@ router.get('/', function(req, res, next) {
   // console.log(fen);
 
   
-  engine.postMessage("setoption name skill level value 20")
+  // engine.postMessage("setoption name skill level value 19")
   engine.postMessage("position fen "+ fen);
-  engine.postMessage("go depth 1");
+  engine.postMessage("go depth 15");
 
   engine.onmessage = function(line){
 
@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
       match = line.match(/bestmove\s+(\S+)/);
       if (match) {
           // console.log("Best move: " + match[1]);
-          // process.exit();
+          
 
           // find the engine move in UCI
           var engine_response_UCI = match[1];
