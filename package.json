@@ -6,17 +6,17 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "@chrisoakman/chessboardjs": "^1.0.0",
-    "chess.js": "^0.10.3",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "ejs": "~2.6.1",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "stockfish": "^10.0.2"
+    "@chrisoakman/chessboardjs": "latest",
+    "chess.js": "latest",
+    "cookie-parser": "latest",
+    "debug": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "http-errors": "latest",
+    "morgan": "latest",
+    "stockfish": "latest"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "latest"
   }
 }
