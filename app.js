@@ -16,9 +16,6 @@ var usersRouter = require('./routes/users');
 var validate_move = require('./routes/validate_move');
 var engine_move = require('./routes/engine_move');
 
-const { Chess } = require('chess.js')
-
-var stockfish = require("stockfish");
 
 
 
@@ -34,7 +31,10 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use(cookieParser());
+// app.use(cookieParser('secret_kaustav')); //needed for signed cookie
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
@@ -53,6 +53,9 @@ app.use('/engine_move',engine_move);
 
 
 
+const { Chess } = require('chess.js')
+
+var stockfish = require("stockfish");
 
 
 app.locals.chess = new Chess(); //app.locals makes it available in other routes and views
