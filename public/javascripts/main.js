@@ -210,7 +210,14 @@ $(document).ready(function(){
                     }
                     
                 
-
+                    // check for checkmate
+                    var checkmate = res.checkmate;
+                    if(checkmate){
+                        alert("Checkmate")
+                        document.getElementById("input").disabled = true;
+                        // break;
+                    }
+                        
 
                     //  5. find engine response to the move
                     // $.get('/engine_move',{'fen':res.FEN},function(engine_response,eng_err) {
@@ -279,6 +286,14 @@ $(document).ready(function(){
                             
                         }
 
+
+                         // check for checkmate
+                        var checkmate = engine_response.checkmate;
+                        console.log(checkmate)
+                        if(checkmate){
+                            alert("Checkmate")
+                            document.getElementById("input").disabled = true;
+                        }
                         
 
                     
@@ -365,6 +380,14 @@ $(document).ready(function(){
                 $('#pgn').scrollTop(height);
                 
             }
+
+
+               // check for checkmate
+               var checkmate = engine_response.checkmate;
+               if(checkmate){
+                   alert("Checkmate")
+                   document.getElementById("input").disabled = true;
+               }
             
         })
     })
@@ -427,6 +450,13 @@ $(document).ready(function(){
                 
             }
 
+               // check for checkmate
+               var checkmate = engine_response.checkmate;
+               console.log(checkmate)
+               if(checkmate){
+                   alert("Checkmate")
+                   document.getElementById("input").disabled = true;
+               }
 
          })
 

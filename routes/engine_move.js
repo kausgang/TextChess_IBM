@@ -48,7 +48,9 @@ router.get('/', function(req, res, next) {
               var engine_response_UCI = match[1];
 
               //load the fen from cookie
-              chess.load(fen)
+              // chess.load(fen)
+              chess.load(arr[0]) //fen was sent at 0th position of array using resolve
+
               // move the piece
               var engine_move = chess.move(engine_response_UCI, { sloppy: true });
 
@@ -58,13 +60,24 @@ router.get('/', function(req, res, next) {
               // find FEN
               var FEN = chess.fen();
 
+               // check for checkmate
+              checkmate = chess.in_checkmate()
+              // console.log(checkmate)
+              if(checkmate)
+                var parameter = {'engine_move':SAN_move,'FEN':FEN,'checkmate':true} //send
+              else
+                var parameter = {'engine_move':SAN_move,'FEN':FEN,'checkmate':false} //send  
+
               // Create response JSON
-              var parameter = {'engine_move':SAN_move,'FEN':FEN}
+              // var parameter = {'engine_move':SAN_move,'FEN':FEN}
 
 
               // update cookie
               res.cookie('fen',FEN,{overwrite: true})
               res.cookie('engine_level',engine_level,{overwrite: true})
+
+
+             
 
 
               // send response 
