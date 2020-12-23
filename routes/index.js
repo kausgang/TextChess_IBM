@@ -12,7 +12,8 @@ router.get('/', function(req, res, next) {
  
 //  console.log(req.app.locals.chess.ascii()) //retrieve the global chess variable this way
 
-
+  // if page is reloaded or loaded for te first time - clear the existing cookie first
+  res.clearCookie("fen");
 
   var engine_level = req.query.engine_level;
 
