@@ -3,7 +3,8 @@
 
 $(document).ready(function(){
 
-    
+    //set starting position if page is loaded
+    document.cookie='fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 
     //start board fen
     var FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
@@ -12,7 +13,7 @@ $(document).ready(function(){
     
 
     var board1 = Chessboard('board1', 'start')
-    var board2 = Chessboard('board2', 'clear')
+    // var board2 = Chessboard('board2', 'clear')
 
     var move_counter = 0;
     var play_as_black = false;
@@ -20,7 +21,7 @@ $(document).ready(function(){
 
 
     var engine_level = $("#engine_level").val()
-    console.log(engine_level)
+    // console.log(engine_level)
 
     $("#engine_level").on('change', function() {
         // alert( this.value );
@@ -157,6 +158,8 @@ $(document).ready(function(){
                 {
 
                     FEN = res.FEN;
+                    // FEN = decodeURIComponent(res.FEN)
+                    // console.log(FEN)
 
                     // 3. enter move into table
                     //  document.getElementById("PGNTable").insertRow(-1).innerHTML = '<td>'+ (++move_counter)+'</td>'+'<td>'+move+'</td>';
@@ -220,8 +223,7 @@ $(document).ready(function(){
                         
 
                     //  5. find engine response to the move
-                    // $.get('/engine_move',{'fen':res.FEN},function(engine_response,eng_err) {
-                    $.get('/engine_move',{'fen':res.FEN , 'engine_level': engine_level},function(engine_response,eng_err) {
+                    $.get('/engine_move',{'engine_level': engine_level},function(engine_response,eng_err) {
 
                         
                         // console.log(engine_response)
@@ -231,6 +233,9 @@ $(document).ready(function(){
 
                         // capture FEN
                         FEN = engine_response.FEN
+                        // FEN = decodeURIComponent(engine_response.FEN)
+                        // console.log(FEN)
+                        
 
                         //update the taable with the engine move
                         // $("#PGNTable").find("tr").last().append('<td>'+engine_move+'</td>');
@@ -289,7 +294,7 @@ $(document).ready(function(){
 
                          // check for checkmate
                         var checkmate = engine_response.checkmate;
-                        console.log(checkmate)
+                        // console.log(checkmate)
                         if(checkmate){
                             alert("Checkmate")
                             document.getElementById("input").disabled = true;
@@ -330,12 +335,13 @@ $(document).ready(function(){
         play_as_black = true;
 
         
+        // console.log(FEN)
 
         //set the board orientation as black
         board1.orientation('black')
         
         // start with engine move
-        $.get('/engine_move',{'fen':FEN,'engine_level': engine_level},function(engine_response,eng_err) {
+        $.get('/engine_move',{'engine_level': engine_level},function(engine_response,eng_err) {
 
                         
             // console.log(engine_response)
@@ -345,6 +351,8 @@ $(document).ready(function(){
 
             // capture FEN
             FEN = engine_response.FEN
+            // FEN = decodeURIComponent(engine_response.FEN)
+            console.log(FEN)
 
             //update the taable with the engine move
             // $("#PGNTable").find("tr").last().append('<td>'+engine_move+'</td>');
@@ -405,7 +413,8 @@ $(document).ready(function(){
         board1.orientation('white');
 
         // start with engine move
-        $.get('/engine_move',{'fen':FEN,'engine_level': engine_level},function(engine_response,eng_err) {
+        $.get('/engine_move',{'engine_level': engine_level},function(engine_response,eng_err) {
+
 
                         
             // console.log(engine_response)
@@ -415,6 +424,8 @@ $(document).ready(function(){
 
             // capture FEN
             FEN = engine_response.FEN
+            // FEN = decodeURIComponent(engine_response.FEN)
+            console.log(FEN)
 
             //update the taable with the engine move
             // $("#PGNTable").find("tr").last().append('<td>'+engine_move+'</td>');
@@ -452,7 +463,7 @@ $(document).ready(function(){
 
                // check for checkmate
                var checkmate = engine_response.checkmate;
-               console.log(checkmate)
+            //    console.log(checkmate)
                if(checkmate){
                    alert("Checkmate")
                    document.getElementById("input").disabled = true;

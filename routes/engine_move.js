@@ -15,14 +15,17 @@ router.get('/', function(req, res, next) {
   var engine = req.app.locals.engine;
 
   //read the cookie set by index.js
-  var fen = req.cookies['fen']
+  // var fen = req.cookies['fen']
+  var fen = decodeURIComponent(req.cookies['fen'])
+  console.log('coocke read - ',fen)
   var engine_level = req.query.engine_level;
 
   // make sure that fen is read from cookie before maaking move
-  var read_cookie = Promise.resolve([fen,engine_level]);
+  // var read_cookie = Promise.resolve([fen,engine_level]);
+  var read_cookie = Promise.resolve(fen);
 
   // if the cookie was successfully read then - 
-  read_cookie.then(function(arr) {
+  read_cookie.then(function(fen) {
 
   
       // engine.postMessage("setoption name skill level value 19")
@@ -49,7 +52,8 @@ router.get('/', function(req, res, next) {
 
               //load the fen from cookie
               // chess.load(fen)
-              chess.load(arr[0]) //fen was sent at 0th position of array using resolve
+              // chess.load(arr[0]) //fen was sent at 0th position of array using resolve
+              chess.load(fen) 
 
               // move the piece
               var engine_move = chess.move(engine_response_UCI, { sloppy: true });
@@ -74,7 +78,7 @@ router.get('/', function(req, res, next) {
 
               // update cookie
               res.cookie('fen',FEN,{overwrite: true})
-              res.cookie('engine_level',engine_level,{overwrite: true})
+              // res.cookie('engine_level',engine_level,{overwrite: true})
 
 
              

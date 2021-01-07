@@ -13,13 +13,13 @@ router.get('/', function(req, res, next) {
 //  console.log(req.app.locals.chess.ascii()) //retrieve the global chess variable this way
 
   // if page is reloaded or loaded for te first time - clear the existing cookie first
-  res.clearCookie("fen");
+  // res.clearCookie("fen");
 
   var engine_level = req.query.engine_level;
 
   // // set cookie
   res.cookie('fen','',{overwrite: true})
-  res.cookie('engine_level',engine_level,{overwrite: true})
+  // res.cookie('engine_level',engine_level,{overwrite: true})
   // res.cookie('fen',fen,{signed:true, overwrite: true})
   // res.cookie('engine_level',engine_level,{signed:true, overwrite: true})
 

@@ -18,15 +18,18 @@ router.get('/', function(req, res, next) {
 
   //read the cookie set by index.js
   var fen = req.cookies['fen']
-  var engine_level = req.cookies['engine_level']
+  // var engine_level = req.cookies['engine_level']
 
   // make sure that fen is read from cookie before maaking move
-  var read_cookie = Promise.resolve([fen,engine_level]);
+  // var read_cookie = Promise.resolve([fen,engine_level]);
+  var read_cookie = Promise.resolve(fen);
 
   // if the cookie was successfully read then - 
-  read_cookie.then(function(arr) {
+  // read_cookie.then(function(arr) {
+    read_cookie.then(function(fen) {
 
-      chess.load(arr[0]) //fen was sent at 0th position of array using resolve
+      // chess.load(arr[0]) //fen was sent at 0th position of array using resolve
+      chess.load(fen) 
 
      
       
@@ -48,8 +51,9 @@ router.get('/', function(req, res, next) {
           var parameters = {'validity':'Valid Move','FEN':fen,'checkmate':false} //send  
         
         // update cookie
+        console.log('setting cookie - ', fen)
         res.cookie('fen',fen,{overwrite: true})
-        res.cookie('engine_level',engine_level,{overwrite: true})
+        // res.cookie('engine_level',engine_level,{overwrite: true})
 
         // res.send('Valid Move')
         res.send(parameters)
