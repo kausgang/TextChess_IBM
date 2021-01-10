@@ -84,7 +84,7 @@ router.get('/', function(req, res, next) {
 
               // update cookie
               res.cookie('fen',FEN,{overwrite: true})
-              // res.cookie('engine_level',engine_level,{overwrite: true})
+              res.cookie('new_game','False',{overwrite: true})
 
 
              
