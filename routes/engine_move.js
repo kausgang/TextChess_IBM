@@ -19,13 +19,19 @@ router.get('/', function(req, res, next) {
   var fen = decodeURIComponent(req.cookies['fen'])
   console.log('coocke read - ',fen)
   var engine_level = req.query.engine_level;
+  var new_game = req.cookies['new_game']
 
   // make sure that fen is read from cookie before maaking move
-  // var read_cookie = Promise.resolve([fen,engine_level]);
-  var read_cookie = Promise.resolve(fen);
+  var read_cookie = Promise.resolve([fen,new_game]);
+  // var read_cookie = Promise.resolve(fen);
 
   // if the cookie was successfully read then - 
-  read_cookie.then(function(fen) {
+  // read_cookie.then(function(fen) {
+    read_cookie.then(function(arr) {
+
+      // if new game cookie is set then reset chess
+      if(arr[1]=='True')
+        req.app.locals.chess.reset();
 
   
       // engine.postMessage("setoption name skill level value 19")

@@ -4,7 +4,9 @@
 $(document).ready(function(){
 
     //set starting position if page is loaded
+    // document.cookie='fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
     document.cookie='fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+    document.cookie='new_game=True'
 
     //start board fen
     var FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
