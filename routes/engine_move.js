@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
   var new_game = req.cookies['new_game']
 
   // make sure that fen is read from cookie before maaking move
-  var read_cookie = Promise.resolve([fen,new_game,validate_move]);
+  var read_cookie = Promise.resolve([fen,new_game]);
   // var read_cookie = Promise.resolve(fen);
 
   // if the cookie was successfully read then - 
