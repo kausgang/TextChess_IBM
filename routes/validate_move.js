@@ -55,11 +55,31 @@ router.get('/', function(req, res, next) {
           var parameters = {'validity':'Valid Move','FEN':fen,'checkmate':true} //send
         else
           var parameters = {'validity':'Valid Move','FEN':fen,'checkmate':false} //send  
+
+
+      //   console.log("Hello");
+      //   setTimeout(() => {  
+          
+      //     console.log("World!");
+      //     res.cookie('fen',fen,{overwrite: true})
+      //     res.cookie('new_game','False',{overwrite: true})
+      //     res.cookie('validate_move','valid_move',{overwrite: true})
+
+      //     res.send(parameters)
+      
+        
+      // }, 5000);
+
+
         
         // update cookie
         // console.log('setting cookie - ', fen)
         res.cookie('fen',fen,{overwrite: true})
         res.cookie('new_game','False',{overwrite: true})
+        res.cookie('validate_move','valid_move',{overwrite: true})
+
+
+
 
         // res.send('Valid Move')
         res.send(parameters)
