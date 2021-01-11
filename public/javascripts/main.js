@@ -112,6 +112,98 @@ $(document).ready(function(){
 
     
 
+
+
+
+
+
+
+
+
+    function engine_move(){
+
+        $.get('/engine_move',{'engine_level': engine_level},function(engine_response,eng_err) {
+
+                                
+            // console.log(engine_response)
+
+            // receive the engine move
+            var engine_move = engine_response.engine_move;
+
+            // capture FEN
+            FEN = engine_response.FEN
+            // FEN = decodeURIComponent(engine_response.FEN)
+            // console.log(FEN)
+            
+
+            //update the taable with the engine move
+            // $("#PGNTable").find("tr").last().append('<td>'+engine_move+'</td>');
+            // $("#PGNTable").append('<td></td><td></td><td>'+engine_move+'</td>');
+            if(play_as_black == true){
+
+                // $("#PGNTable").append('<tr><td> '+ (++move_counter)+' .</td>'+'<td>'+engine_move+' </td></tr>');
+                $("#PGNTable").append('<tr><td> '+ (++move_counter)
+                +' .</td>'+'<td id="Move" data-FEN="'+ FEN +'" >'
+                +'<a href="#">'
+                +engine_move+' </td></tr>');
+
+
+                // push move in movelist
+                movelist.push(move_counter+". "+engine_move)
+
+            }
+            else{
+
+                // $("#PGNTable").append('<td></td><td></td><td>'+engine_move+'</td>');
+                $("#PGNTable").append('<td></td><td></td>'
+                +' .</td>'+'<td id="Move" data-FEN="'+ FEN +'" >'
+                +'<a href="#">'
+                +engine_move+'</td>'); 
+
+                // push move in movelist
+                movelist.push(" "+engine_move)
+            }
+                
+
+            //  4. update board fen
+            // FEN = engine_response.FEN;
+            board1.position(FEN)
+
+            
+            // save move in copy fen button
+            $("#copy_fen").attr("data-clipboard-text",FEN)
+
+            // save the PGN into export pgn button
+            $("#export_pgn").attr("data-clipboard-text",movelist)
+            
+
+            // Scroll the PGN table to the end move
+            var scrollBottom = 0;
+            scrollBottom = Math.max($('#PGNTable').height() - $('#pgn').height() + 20, 0);
+    
+            if(scrollBottom > 0)
+            {
+    
+                var height = $('#PGNTable').height();
+                // $('#PGNTable').scrollTop(scrollBottom);
+                $('#pgn').scrollTop(height);
+                
+            }
+
+
+            // check for checkmate
+            var checkmate = engine_response.checkmate;
+            // console.log(checkmate)
+            if(checkmate){
+                alert("Checkmate")
+                document.getElementById("input").disabled = true;
+            }
+            
+
+        
+        })
+
+    }
     
   
 
@@ -154,6 +246,8 @@ $(document).ready(function(){
 
             // 2. Check if this is a leagal move
             $.get('/validate_move',{move:move},function(res,err) {
+
+                document.cookie='new_game=False'
                 
                 if(res == 'Illegal Move')
                     alert('Illegal Move, Chess moves are case sensetive')
@@ -232,204 +326,27 @@ $(document).ready(function(){
 
                     // check if validate cookie is set
                     // check if validateMove has run by checking cookie
-                    var user_move_done = true
+                    // var user_move_done = true
 
                  
 
-                    while(user_move_done){
-                        validate_move = getCookie('validate_move')
-                        console.log('validate_move_done status - ',validate_move)
-                        if(validate_move == 'valid_move'){
+                    // while(user_move_done){
+                    //     validate_move = getCookie('validate_move')
+                    //     console.log('validate_move_done status - ',validate_move)
+                    //     if(validate_move == 'valid_move'){
                             
-                            user_move_done=false
-
-
-
-
-                                                //  5. find engine response to the move
-                            $.get('/engine_move',{'engine_level': engine_level},function(engine_response,eng_err) {
-
-                                
-                                // console.log(engine_response)
-
-                                // receive the engine move
-                                var engine_move = engine_response.engine_move;
-
-                                // capture FEN
-                                FEN = engine_response.FEN
-                                // FEN = decodeURIComponent(engine_response.FEN)
-                                // console.log(FEN)
-                                
-
-                                //update the taable with the engine move
-                                // $("#PGNTable").find("tr").last().append('<td>'+engine_move+'</td>');
-                                // $("#PGNTable").append('<td></td><td></td><td>'+engine_move+'</td>');
-                                if(play_as_black == true){
-
-                                    // $("#PGNTable").append('<tr><td> '+ (++move_counter)+' .</td>'+'<td>'+engine_move+' </td></tr>');
-                                    $("#PGNTable").append('<tr><td> '+ (++move_counter)
-                                    +' .</td>'+'<td id="Move" data-FEN="'+ FEN +'" >'
-                                    +'<a href="#">'
-                                    +engine_move+' </td></tr>');
-
-
-                                    // push move in movelist
-                                    movelist.push(move_counter+". "+engine_move)
-
-                                }
-                                else{
-
-                                    // $("#PGNTable").append('<td></td><td></td><td>'+engine_move+'</td>');
-                                    $("#PGNTable").append('<td></td><td></td>'
-                                    +' .</td>'+'<td id="Move" data-FEN="'+ FEN +'" >'
-                                    +'<a href="#">'
-                                    +engine_move+'</td>'); 
-
-                                    // push move in movelist
-                                    movelist.push(" "+engine_move)
-                                }
-                                    
-
-                                //  4. update board fen
-                                // FEN = engine_response.FEN;
-                                board1.position(FEN)
-
-                                
-                                // save move in copy fen button
-                                $("#copy_fen").attr("data-clipboard-text",FEN)
-
-                                // save the PGN into export pgn button
-                                $("#export_pgn").attr("data-clipboard-text",movelist)
-                                
-
-                                // Scroll the PGN table to the end move
-                                var scrollBottom = 0;
-                                scrollBottom = Math.max($('#PGNTable').height() - $('#pgn').height() + 20, 0);
-                        
-                                if(scrollBottom > 0)
-                                {
-                        
-                                    var height = $('#PGNTable').height();
-                                    // $('#PGNTable').scrollTop(scrollBottom);
-                                    $('#pgn').scrollTop(height);
-                                    
-                                }
-
-
-                                // check for checkmate
-                                var checkmate = engine_response.checkmate;
-                                // console.log(checkmate)
-                                if(checkmate){
-                                    alert("Checkmate")
-                                    document.getElementById("input").disabled = true;
-                                }
-                                
-
-                            
-                            })
-
-
-
-                        }
-                        else{
-                            console.log('user_move_done status - ',user_move_done)
-                            continue;
-                        }
-                        
-                    }
+                    //         user_move_done=false
 
 
 
                     
 
-                    /*
+                    //                             //  5. find engine response to the move
 
-                    //  5. find engine response to the move
-                    $.get('/engine_move',{'engine_level': engine_level},function(engine_response,eng_err) {
-
-                        
-                        // console.log(engine_response)
-
-                        // receive the engine move
-                        var engine_move = engine_response.engine_move;
-
-                        // capture FEN
-                        FEN = engine_response.FEN
-                        // FEN = decodeURIComponent(engine_response.FEN)
-                        // console.log(FEN)
-                        
-
-                        //update the taable with the engine move
-                        // $("#PGNTable").find("tr").last().append('<td>'+engine_move+'</td>');
-                        // $("#PGNTable").append('<td></td><td></td><td>'+engine_move+'</td>');
-                        if(play_as_black == true){
-
-                            // $("#PGNTable").append('<tr><td> '+ (++move_counter)+' .</td>'+'<td>'+engine_move+' </td></tr>');
-                            $("#PGNTable").append('<tr><td> '+ (++move_counter)
-                            +' .</td>'+'<td id="Move" data-FEN="'+ FEN +'" >'
-                            +'<a href="#">'
-                            +engine_move+' </td></tr>');
+                    engine_move()
 
 
-                            // push move in movelist
-                            movelist.push(move_counter+". "+engine_move)
-
-                        }
-                        else{
-
-                            // $("#PGNTable").append('<td></td><td></td><td>'+engine_move+'</td>');
-                            $("#PGNTable").append('<td></td><td></td>'
-                            +' .</td>'+'<td id="Move" data-FEN="'+ FEN +'" >'
-                            +'<a href="#">'
-                            +engine_move+'</td>'); 
-
-                            // push move in movelist
-                            movelist.push(" "+engine_move)
-                        }
-                            
-
-                        //  4. update board fen
-                        // FEN = engine_response.FEN;
-                        board1.position(FEN)
-
-                        
-                        // save move in copy fen button
-                        $("#copy_fen").attr("data-clipboard-text",FEN)
-
-                        // save the PGN into export pgn button
-                        $("#export_pgn").attr("data-clipboard-text",movelist)
-                        
-
-                        // Scroll the PGN table to the end move
-                        var scrollBottom = 0;
-                        scrollBottom = Math.max($('#PGNTable').height() - $('#pgn').height() + 20, 0);
-                
-                        if(scrollBottom > 0)
-                        {
-                
-                            var height = $('#PGNTable').height();
-                            // $('#PGNTable').scrollTop(scrollBottom);
-                            $('#pgn').scrollTop(height);
-                            
-                        }
-
-
-                         // check for checkmate
-                        var checkmate = engine_response.checkmate;
-                        // console.log(checkmate)
-                        if(checkmate){
-                            alert("Checkmate")
-                            document.getElementById("input").disabled = true;
-                        }
-                        
-
-                    
-                    })
-
-
-
-
-                    */
+           
                     
 
                 }

@@ -14,6 +14,8 @@ router.get('/', function(req, res, next) {
   var chess = req.app.locals.chess;
   var engine = req.app.locals.engine;
 
+
+
   //read the cookie set by index.js
   // var fen = req.cookies['fen']
   var fen = decodeURIComponent(req.cookies['fen'])
@@ -22,7 +24,8 @@ router.get('/', function(req, res, next) {
   var new_game = req.cookies['new_game']
 
   // make sure that fen is read from cookie before maaking move
-  var read_cookie = Promise.resolve([fen,new_game,validate_move]);
+  // var read_cookie = Promise.resolve([fen,new_game,validate_move]);
+  var read_cookie = Promise.resolve([fen,new_game]);
   // var read_cookie = Promise.resolve(fen);
 
   // if the cookie was successfully read then - 
@@ -31,7 +34,10 @@ router.get('/', function(req, res, next) {
 
    
 
-
+            // if new game cookie is set then reset chess
+            if(arr[1]=='True')
+            req.app.locals.chess.reset();
+            engine.postMessage("setoption name Clear Hash")
       
         
 

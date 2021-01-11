@@ -14,6 +14,7 @@ router.get('/', function(req, res, next) {
   var move = req.query.move;
   
   var chess = req.app.locals.chess;
+  var engine = req.app.locals.engine;
   
 
   //read the cookie set by index.js
@@ -30,8 +31,10 @@ router.get('/', function(req, res, next) {
 
 
       // if new game cookie is set then reset chess
-      if(arr[1]=='True')
+      if(arr[1]=='True'){
         req.app.locals.chess.reset();
+        engine.postMessage("setoption name Clear Hash")
+      }
     
 
       chess.load(arr[0]) //fen was sent at 0th position of array using resolve
@@ -57,23 +60,13 @@ router.get('/', function(req, res, next) {
           var parameters = {'validity':'Valid Move','FEN':fen,'checkmate':false} //send  
 
 
-      //   console.log("Hello");
-      //   setTimeout(() => {  
-          
-      //     console.log("World!");
-      //     res.cookie('fen',fen,{overwrite: true})
-      //     res.cookie('new_game','False',{overwrite: true})
-      //     res.cookie('validate_move','valid_move',{overwrite: true})
-
-      //     res.send(parameters)
-      
         
-      // }, 5000);
+
 
 
         
-        // update cookie
-        // console.log('setting cookie - ', fen)
+        //// update cookie
+     
         res.cookie('fen',fen,{overwrite: true})
         res.cookie('new_game','False',{overwrite: true})
         res.cookie('validate_move','valid_move',{overwrite: true})
@@ -81,7 +74,7 @@ router.get('/', function(req, res, next) {
 
 
 
-        // res.send('Valid Move')
+        
         res.send(parameters)
 
       }
