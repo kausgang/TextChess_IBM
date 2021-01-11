@@ -15,18 +15,18 @@ router.get('/', function(req, res, next) {
   // if page is reloaded or loaded for te first time - clear the existing cookie first
   // res.clearCookie("fen");
 
-  var engine_level = req.query.engine_level;
+  // var engine_level = req.query.engine_level;
 
   // // set cookie
   res.cookie('fen','',{overwrite: true})
-  // res.cookie('engine_level',engine_level,{overwrite: true})
+  res.cookie('new_game','Ture',{overwrite: true})
   // res.cookie('fen',fen,{signed:true, overwrite: true})
   // res.cookie('engine_level',engine_level,{signed:true, overwrite: true})
 
 
 
   // // Reset game if page is reloaded
-  req.app.locals.chess.reset();
+  // req.app.locals.chess.reset();
 
   //render the page
   res.render('index', { title: 'Express' });
