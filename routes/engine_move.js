@@ -35,9 +35,11 @@ router.get('/', function(req, res, next) {
    
 
             // if new game cookie is set then reset chess
-            if(arr[1]=='True')
-            req.app.locals.chess.reset();
-            engine.postMessage("setoption name Clear Hash")
+            if(arr[1]=='True'){
+              req.app.locals.chess.reset();
+              engine.postMessage("setoption name Clear Hash")
+            }
+           
       
         
 
