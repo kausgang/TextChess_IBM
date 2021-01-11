@@ -3,6 +3,8 @@
 
 $(document).ready(function(){
 
+    $.removeCookie('fen', { path: '/' });    
+
     //set starting position if page is loaded
     // document.cookie='fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
     document.cookie='fen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
@@ -323,25 +325,6 @@ $(document).ready(function(){
 
 
 
-
-                    // check if validate cookie is set
-                    // check if validateMove has run by checking cookie
-                    // var user_move_done = true
-
-                 
-
-                    // while(user_move_done){
-                    //     validate_move = getCookie('validate_move')
-                    //     console.log('validate_move_done status - ',validate_move)
-                    //     if(validate_move == 'valid_move'){
-                            
-                    //         user_move_done=false
-
-
-
-                    
-
-                    //                             //  5. find engine response to the move
 
                     engine_move()
 
