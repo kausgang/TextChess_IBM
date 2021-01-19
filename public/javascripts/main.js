@@ -3,6 +3,8 @@
 
 $(document).ready(function(){
 
+    
+
     $.removeCookie('fen', { path: '/' });    
 
     //set starting position if page is loaded
@@ -19,7 +21,7 @@ $(document).ready(function(){
     
 
     var board1 = Chessboard('board1', 'start')
-    // var board2 = Chessboard('board2', 'clear')
+    var board2 = Chessboard('board2', 'clear')
 
     var move_counter = 0;
     var play_as_black = false;
@@ -93,7 +95,7 @@ $(document).ready(function(){
     // show Empty board
     $("#empty_board").click(function(){
         
-        if($(this).text() == "Show Empty Board")
+        if($(this).text() == "Empty Board")
         {
             
             $("#board1").hide();
@@ -104,7 +106,7 @@ $(document).ready(function(){
         else
         {
             $("#board2").hide();
-            $(this).text("Show Empty Board");
+            $(this).text("Empty Board");
             $("#show-hide_button").show()
 
         }

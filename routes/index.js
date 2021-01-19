@@ -29,7 +29,7 @@ router.get('/', function(req, res, next) {
   // req.app.locals.chess.reset();
 
   //render the page
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'TextChess' });
   
  
 });
